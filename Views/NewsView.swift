@@ -21,7 +21,6 @@ struct NewsView: View {
                     .onTapGesture {
                         openURL(URL(string: news.url)!)
                     }
-                
             }
         }
         .refreshable {
