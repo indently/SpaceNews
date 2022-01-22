@@ -8,52 +8,26 @@
 import SwiftUI
 
 struct NewsView: View {
-    @EnvironmentObject var data : NewsData
+    @EnvironmentObject var data : SpaceAPI
     private var textWidth = 300.0
     
     var body: some View {
         List {
             ForEach(data.news) { news in
-                VStack(alignment: .leading) {
-                    
-                    Text("\(news.newsSite)")
-                        .foregroundColor(.blue)
-                        .italic()
-                    
-                    HStack(alignment: .center) {
-                        AsyncImage(url: URL(string: news.imageUrl), transaction: Transaction(animation: .easeInOut)) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                                    .transition(.scale(scale: 0.1, anchor: .center))
-                            } else {
-                                ProgressView()
-                            }
-                        }
-                    }
-                    Text(news.title)
-                        .font(.headline)
-                        .padding(8)
-                    
-                    
-                    Text(news.summary)
-                        .font(.body)
-                        .padding(8)
-        
-                }
+                NewsArticle(
+                    title: news.title,
+                    imageURL: news.imageUrl, siteName: news.newsSite, summary: news.summary)
             }
         }
         .refreshable {
-            data.fetchSpaceData()
+            data.getData()
         }
     }
-}
-
-struct NewsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewsView()
-            .environmentObject(NewsData())
+    
+    struct NewsView_Previews: PreviewProvider {
+        static var previews: some View {
+            NewsView()
+                .environmentObject(SpaceAPI())
+        }
     }
 }

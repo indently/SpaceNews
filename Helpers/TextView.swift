@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import SwiftUI
 
+// NOT USED IN THE PROJECT, JUST FOR EXPERIMENTATION PURPOSES
+
 struct TextView: UIViewRepresentable {
     var text: String
     var textAlignmentStyle : TextAlignmentStyle

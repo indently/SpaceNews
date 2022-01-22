@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var data = NewsData()
+    @StateObject var data = SpaceAPI()
     
     var body: some View {
         VStack {
@@ -16,7 +16,7 @@ struct ContentView: View {
         }
         .environmentObject(data)
         .onAppear {
-            data.fetchSpaceData()
+            data.getData()
         }
     }
 }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct SpaceData : Codable, Identifiable {
     var id: Int
     var title: String
@@ -19,8 +18,10 @@ struct SpaceData : Codable, Identifiable {
     var publishedAt: String
 }
 
-class SpaceAPI {
-    func getData(completion:@escaping ([SpaceData]) -> ()) {
+@MainActor class SpaceAPI: ObservableObject {
+    @Published var news: [SpaceData] = []
+    
+    func getData() {
         guard let url = URL(string: "https://api.spaceflightnewsapi.net/v3/articles") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -29,20 +30,12 @@ class SpaceAPI {
             let spaceData = try! JSONDecoder().decode([SpaceData].self, from: data)
             
             DispatchQueue.main.async {
-                print("Space Articles: \(spaceData.count)")
-                completion(spaceData)
+                print("Loaded new data successfully! Articles: \(spaceData.count)")
+                self.news = spaceData
             }
         }.resume()
     }
 }
 
-@MainActor class NewsData: ObservableObject {
-    @Published var news: [SpaceData] = []
-    
-    func fetchSpaceData() {
-        SpaceAPI().getData { data in
-            self.news = data
-        }
-    }
-}
+
 
