@@ -53,9 +53,6 @@
 		7A4330FB279AB05E00A06C2B = {
 			isa = PBXGroup;
 			children = (
-				7A310EAB279C54F20050595B /* Helpers */,
-				7A433115279AB08200A06C2B /* Views */,
-				7A43311A279AB0CE00A06C2B /* API */,
 				7A433106279AB05E00A06C2B /* SpaceNews */,
 				7A433105279AB05E00A06C2B /* Products */,
 			);
@@ -72,6 +69,9 @@
 		7A433106279AB05E00A06C2B /* SpaceNews */ = {
 			isa = PBXGroup;
 			children = (
+				7A433115279AB08200A06C2B /* Views */,
+				7A43311A279AB0CE00A06C2B /* API */,
+				7A310EAB279C54F20050595B /* Helpers */,
 				7A433107279AB05E00A06C2B /* SpaceNewsApp.swift */,
 				7A43310B279AB05F00A06C2B /* Assets.xcassets */,
 				7A43310D279AB05F00A06C2B /* Preview Content */,
