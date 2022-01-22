@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct NewsArticle: View {
     let title: String
@@ -20,20 +21,17 @@ struct NewsArticle: View {
                 .italic()
             
             HStack(alignment: .center) {
-                AsyncImage(url: URL(string: imageURL), transaction: Transaction(animation: .easeInOut)) { phase in
+                CachedAsyncImage(url: URL(string: imageURL), transaction: Transaction(animation: .easeInOut)) { phase in
                     if let image = phase.image {
                         image
                             .resizable()
                             .scaledToFit()
                             .clipShape(RoundedRectangle(cornerRadius: 25))
-                            .transition(.scale(scale: 0.1, anchor: .center))
+                            .transition(.opacity)
                     } else {
                         HStack {
-                            Spacer()
-                            ProgressView()
-                            Spacer()
+                            // Insert your placeholder here
                         }
-                        
                     }
                 }
             }
@@ -42,7 +40,7 @@ struct NewsArticle: View {
                 .padding(8)
             
             Text(summary)
-                .lineLimit(4)
+                .lineLimit(6)
                 .font(.body)
                 .padding(8)
         }
