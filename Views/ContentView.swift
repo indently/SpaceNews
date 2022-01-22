@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var data = NewsData()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            NewsView()
+        }
+        .environmentObject(data)
+        .onAppear {
+            data.fetchSpaceData()
+        }
     }
 }
 
